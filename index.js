@@ -17,6 +17,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Triangle = require('./lib/Triangle');
+const Circle = require('./lib/Circle');
+const Square = require('./lib/Square');
+
+
 
 const questions = [
     {
@@ -52,8 +56,10 @@ function createShape({text,colorText,colorShape,shape}){
             logo = new Triangle();
             break;
         case 'circle':
+            logo = new Circle();
             break;
         case 'square':
+            logo = new Square();
             break;
     }
     console.log(shape);
