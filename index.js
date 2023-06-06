@@ -16,6 +16,7 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Triangle = require('./lib/Triangle');
 
 const questions = [
     {
@@ -25,8 +26,13 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'Enter a color:',
-        name: 'color'
+        message: 'Enter text color:',
+        name: 'colorText'
+    },
+    {
+        type: 'input',
+        message: 'Enter shape color:',
+        name: 'colorShape'
     },
     {
         type: 'list',
@@ -36,9 +42,34 @@ const questions = [
     }
 ];
 
+function createShape({text,colorText,colorShape,shape}){
+    //check what type of shape user inputs
+    switch (shape){
+        //make a class with it 
+        case 'triangle':
+            const logo = new Triangle();
+            break;
+        case 'circle':
+            break;
+        case 'square':
+            break;
+    }
+    //set the color of the shape
+    logo.setColor(colorShape);
+    return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+  ${logo.render()}
+
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${colorText}">${text}</text>
+
+</svg>
+    `
+}
 inquirer.prompt(questions)
 .then((response) => {
-    //pass to rendershape
+    //get the shape, color , text variables
+    //pass into create and get str return
+    const dataToWrite = createShape(response)
 })
 
 
