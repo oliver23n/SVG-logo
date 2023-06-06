@@ -43,17 +43,21 @@ const questions = [
 ];
 
 function createShape({text,colorText,colorShape,shape}){
+    let logo;
+    text = text.toUpperCase();
     //check what type of shape user inputs
     switch (shape){
         //make a class with it 
         case 'triangle':
-            const logo = new Triangle();
+            logo = new Triangle();
             break;
         case 'circle':
             break;
         case 'square':
             break;
     }
+    console.log(shape);
+
     //set the color of the shape
     logo.setColor(colorShape);
     return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -65,11 +69,18 @@ function createShape({text,colorText,colorShape,shape}){
 </svg>
     `
 }
+
+function writeToFile( name, data){
+
+    fs.writeFile(`./examples/${name}.svg`, data, err => err ? console.error(err) : console.log('Generated logo.svg!'));
+    
+}
 inquirer.prompt(questions)
 .then((response) => {
     //get the shape, color , text variables
     //pass into create and get str return
-    const dataToWrite = createShape(response)
+    const dataToWrite = createShape(response);
+    writeToFile('logo',dataToWrite);
 })
 
 
